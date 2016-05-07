@@ -1,0 +1,75 @@
+﻿<h3>Directive</h3>
+
+<h5>Change style</h5>
+<hr />
+<div class="main-div">
+    <p [style.background]="'lightblue'" class="sub-div half-width-div">single style change </p>
+    <p [ngStyle]="setStyles()" class="sub-div">multiple style change </p>
+    <p [ngClass]="{active: !isActive}" class="sub-div ">Active class with condition</p>
+</div>
+
+
+<h5>On hover change style of element</h5>
+<hr />
+<!--Set background color and font color using static value from directive-->
+<span myHighlight>
+    Hover me!   
+</span>
+
+<!--Set background color by input value-->
+<h5>Pick a highlight color</h5>
+<hr />
+<div class="half-width-div">
+    <div>
+        <input type="radio" name="colors" (click)="color='lightgreen'">Green
+        <input type="radio" name="colors" (click)="color='yellow'">Yellow
+    </div>
+    <p [myHighlight]="color">Highlight without assigned default color!</p>
+    <p [myHighlight]="color" [defaultColor]="'coral'">Highlight with default color!</p>
+</div>
+
+<h5>Toggling</h5>
+<hr />
+<button (click)=" toggleDiv($event)">Toggle div</button>
+{{showDiv}}
+<div [hidden]="!showDiv">
+    Toggle this div
+</div>
+<br>
+<div componentDemo>New 
+<div [ngClass]="{active: !isMaintain}">Add Conditional class</div>
+</div>
+
+<h5>ngIf and ngFor</h5>
+<hr />
+<div class="sub-div half-width-div">
+    <div *ngFor="#childList of parentList">
+        {{ childList }}
+    </div>
+</div>
+<div class="sub-div">
+    <div *ngFor="#group of groups">
+        <label>{{group.title}}</label><br />
+        <label>{{group.content}}</label>
+        <label *ngIf="group.title=='Title-1'">(Is conditional)</label>
+    </div>
+</div>
+<br />
+<h5>Binding</h5>
+<hr />
+<div>
+    <div class="sub-div half-width-div">
+        <b>   One way from data source to view</b><br />
+        <button [disabled]="isDisable">Button</button>
+    </div>
+    <div class="sub-div">
+
+        <b>  Two way</b>
+        <div>
+            <label>{{people.name}}</label>
+            <br />
+            <label>{{people.address}}</label>
+        </div>
+        <input type="text" [(ngModel)]="people.name" />
+    </div>
+</div>
